@@ -1,13 +1,13 @@
-package com.jameschamberlain.recipes.ui.dashboard
+package com.jameschamberlain.recipes.ui.shopping_list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class ShoppingListViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+        value = "This is shopping list Fragment"
     }
     val text: LiveData<String> = _text
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Global colours. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorSecondary">?attr/colorPrimary</item>
+        <item name="colorSurface">@android:color/white</item>
+        <item name="android:windowBackground">?attr/colorSurface</item>
+
+        <!-- Bottom nav -->
+        <item name="bottomNavigationStyle">@style/bottomNavigationStyle</item>
+
+        <!-- Window decor -->
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:navigationBarColor">@android:color/white</item>
+
+    </style>
+</resources>

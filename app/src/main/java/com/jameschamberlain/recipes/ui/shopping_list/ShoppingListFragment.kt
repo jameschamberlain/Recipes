@@ -1,4 +1,4 @@
-package com.jameschamberlain.recipes.ui.home
+package com.jameschamberlain.recipes.ui.shopping_list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.jameschamberlain.recipes.R
 
-class HomeFragment : Fragment() {
+class ShoppingListFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var shoppingListViewModel: ShoppingListViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
+        shoppingListViewModel =
+                ViewModelProviders.of(this).get(ShoppingListViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_shopping_list, container, false)
+        val textView: TextView = root.findViewById(R.id.text_shopping_list)
+        shoppingListViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

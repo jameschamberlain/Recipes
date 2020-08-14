@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "116177654880",
+    "firebase_url": "https://recipes-ac18e.firebaseio.com",
+    "project_id": "recipes-ac18e",
+    "storage_bucket": "recipes-ac18e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:116177654880:android:311f1f923af4869954df05",
+        "android_client_info": {
+          "package_name": "com.jameschamberlain.recipes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "116177654880-7l35edijvf4hj788ai7beiu9q8ad4djd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATGTexCk2vS7cdzPEdtiA4c5DYUBTZWng"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "116177654880-7l35edijvf4hj788ai7beiu9q8ad4djd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

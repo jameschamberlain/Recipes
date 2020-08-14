@@ -21,6 +21,6 @@
 
     <!-- Styles the startup screen to show the app logo. -->
     <style name="AppTheme.Launcher">
-        <item name="android:windowBackground">@drawable/splash_bg</item>
+        <item name="android:windowBackground">@drawable/preview_window</item>
     </style>
 </resources>

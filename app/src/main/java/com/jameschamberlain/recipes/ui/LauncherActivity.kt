@@ -5,9 +5,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.jameschamberlain.recipes.MainActivity
 
-class StartupActivity : AppCompatActivity() {
+class LauncherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        startActivity(Intent(this@StartupActivity, MainActivity::class.java))
+        startActivity(Intent(this@LauncherActivity, MainActivity::class.java))
     }
 }

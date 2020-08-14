@@ -1,17 +1,27 @@
 package com.jameschamberlain.recipes.ui.recipes
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.CenterInside
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.storage.FirebaseStorage
+import com.jameschamberlain.recipes.GlideApp
+import com.jameschamberlain.recipes.MyAppGlideModule
 import com.jameschamberlain.recipes.data.Recipe
 import com.jameschamberlain.recipes.databinding.ItemRecipeBinding
 
 private const val TAG = "RecipeAdapter"
 
-class RecipeAdapter(options: FirestoreRecyclerOptions<Recipe>) : FirestoreRecyclerAdapter<Recipe, RecipeAdapter.RecipeHolder>(options) {
+class RecipeAdapter(options: FirestoreRecyclerOptions<Recipe>, private val context: Context) : FirestoreRecyclerAdapter<Recipe, RecipeAdapter.RecipeHolder>(options) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeHolder {
         val itemBinding = ItemRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -19,7 +29,10 @@ class RecipeAdapter(options: FirestoreRecyclerOptions<Recipe>) : FirestoreRecycl
     }
 
     override fun onBindViewHolder(holder: RecipeHolder, position: Int, model: Recipe) {
-//        holder.imageView = model.image
+        GlideApp.with(context)
+            .load(model.image)
+            .apply(RequestOptions.bitmapTransform(RoundedCorners(8)))
+            .into(holder.imageView)
         holder.titleTextView.text = model.name
         var recipeDesc = model.description
         if (model.description.length > 120)

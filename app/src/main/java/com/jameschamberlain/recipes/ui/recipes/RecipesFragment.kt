@@ -1,7 +1,6 @@
 package com.jameschamberlain.recipes.ui.recipes
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,9 +32,10 @@ class RecipesFragment : Fragment() {
     ): View? {
         recipesViewModel =
                 ViewModelProvider(this).get(RecipesViewModel::class.java)
-        binding = FragmentRecipesBinding.inflate(layoutInflater)
+        binding = FragmentRecipesBinding.inflate(inflater, container, false)
+
         recipesViewModel.text.observe(viewLifecycleOwner, Observer {
-            binding.textRecipes.text = it
+//            binding.textRecipes.text = it
         })
         return binding.root
     }
@@ -48,7 +48,7 @@ class RecipesFragment : Fragment() {
         val options = FirestoreRecyclerOptions.Builder<Recipe>()
             .setQuery(query, Recipe::class.java)
             .build()
-        adapter = RecipeAdapter(options)
+        adapter = RecipeAdapter(options, requireContext())
         binding.recipesRecyclerView.adapter = adapter
         binding.recipesRecyclerView.layoutManager = LinearLayoutManager(activity)
 

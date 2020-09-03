@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
@@ -21,7 +22,11 @@ import com.jameschamberlain.recipes.databinding.ItemRecipeBinding
 
 private const val TAG = "RecipeAdapter"
 
-class RecipeAdapter(options: FirestoreRecyclerOptions<Recipe>, private val context: Context) : FirestoreRecyclerAdapter<Recipe, RecipeAdapter.RecipeHolder>(options) {
+class RecipeAdapter(
+    options: FirestoreRecyclerOptions<Recipe>,
+    private val context: Context,
+    private val parentFragment: RecipesFragment
+) : FirestoreRecyclerAdapter<Recipe, RecipeAdapter.RecipeHolder>(options) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeHolder {
         val itemBinding = ItemRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -37,15 +42,24 @@ class RecipeAdapter(options: FirestoreRecyclerOptions<Recipe>, private val conte
         var recipeDesc = model.description
         if (model.description.length > 120)
             recipeDesc = recipeDesc.substring(0, 117) + "..."
-        Log.e(TAG, recipeDesc)
         holder.descTextView.text = recipeDesc
+
+        holder.parentLayout.setOnClickListener {
+            val recipeId = this.snapshots.getSnapshot(position).id
+            val action = RecipesFragmentDirections
+                .actionNavigationRecipesToNavigationRecipeDetails(recipeId)
+            NavHostFragment
+                .findNavController(parentFragment)
+                .navigate(action)
+        }
     }
 
 
-    inner class RecipeHolder(itemBinding: ItemRecipeBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+    class RecipeHolder(itemBinding: ItemRecipeBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         var imageView = itemBinding.imageView
         var titleTextView = itemBinding.titleTextView
         var descTextView = itemBinding.descTextView
+        var parentLayout = itemBinding.parentLayout
     }
 
 }

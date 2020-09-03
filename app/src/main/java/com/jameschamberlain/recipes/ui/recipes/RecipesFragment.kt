@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
@@ -34,7 +33,7 @@ class RecipesFragment : Fragment() {
                 ViewModelProvider(this).get(RecipesViewModel::class.java)
         binding = FragmentRecipesBinding.inflate(inflater, container, false)
 
-        recipesViewModel.text.observe(viewLifecycleOwner, Observer {
+        recipesViewModel.text.observe(viewLifecycleOwner, {
 //            binding.textRecipes.text = it
         })
         return binding.root
@@ -43,14 +42,12 @@ class RecipesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recipesRef = Firebase.firestore.collection("recipes")
-        val query: Query = recipesRef
+        val query: Query = Firebase.firestore.collection("recipes")
         val options = FirestoreRecyclerOptions.Builder<Recipe>()
             .setQuery(query, Recipe::class.java)
             .build()
-        adapter = RecipeAdapter(options, requireContext())
+        adapter = RecipeAdapter(options, requireContext(), this@RecipesFragment)
         binding.recipesRecyclerView.adapter = adapter
-        binding.recipesRecyclerView.layoutManager = LinearLayoutManager(activity)
 
     }
 

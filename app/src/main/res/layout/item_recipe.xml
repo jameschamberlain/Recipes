@@ -1,44 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="104dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="?attr/selectableItemBackground"
+    android:layout_width="match_parent"
+    android:id="@+id/parent_layout"
+    android:layout_height="88dp"
+    android:layout_marginHorizontal="@dimen/content_margin"
+    android:layout_marginVertical="8dp"
+    android:background="@drawable/rounded_bg"
     android:clickable="true"
+    android:focusable="true"
     android:padding="8dp">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/image_view"
-        android:layout_width="88dp"
+        android:layout_width="72dp"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_recipe"
-        app:layout_constraintStart_toStartOf="parent"
         android:background="@android:color/darker_gray"
+        android:contentDescription="Recipe image."
         android:scaleType="centerCrop"
-        android:contentDescription="Recipe image."/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_recipe" />
 
     <TextView
         android:id="@+id/title_text_view"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        tools:text="Homemade Pizza"
+        android:maxLines="1"
+        app:layout_constraintBottom_toTopOf="@id/desc_text_view"
         app:layout_constraintStart_toEndOf="@id/image_view"
         app:layout_constraintTop_toTopOf="@id/image_view"
-        style="@style/TextAppearance.AppCompat.Headline"
-        android:layout_marginTop="4dp"/>
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="@string/dummy_recipe_name" />
 
     <TextView
         android:id="@+id/desc_text_view"
-        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:maxLength="120"
-        tools:text="Classic homemade pizza recipe, including pizza dough and toppings, step-by-step instructions with photos. Make perfect pizza at home!"
+        android:maxLength="104"
+        android:maxLines="2"
+        app:layout_constraintBottom_toBottomOf="@id/image_view"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/title_text_view"
         app:layout_constraintTop_toBottomOf="@id/title_text_view"
-        style="@style/TextAppearance.AppCompat.Body1"/>
+        tools:text="@string/dummy_recipe_desc" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,9 +12,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:itemCount="5"
+        android:paddingBottom="72dp"
         android:visibility="visible"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="vertical"
+        android:clipToPadding="false"
         tools:listitem="@layout/item_recipe" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

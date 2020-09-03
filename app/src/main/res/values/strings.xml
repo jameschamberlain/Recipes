@@ -3,4 +3,10 @@
     <string name="title_recipes">Recipes</string>
     <string name="title_search">Search</string>
     <string name="title_shopping_list">Shopping List</string>
+
+    <string name="dummy_recipe_name">Homemade Pizza</string>
+    <string name="dummy_recipe_desc">Classic homemade pizza recipe, including pizza dough and toppings, step-by-step instructions with photos. Make perfect pizza at home!</string>
+
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 </resources>

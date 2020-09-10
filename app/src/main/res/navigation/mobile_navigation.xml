@@ -16,17 +16,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_search"
-        android:name="com.jameschamberlain.recipes.ui.search.SearchFragment"
-        android:label="@string/title_search"
-        tools:layout="@layout/fragment_search" />
-
-    <fragment
-        android:id="@+id/navigation_shopping_list"
-        android:name="com.jameschamberlain.recipes.ui.shopping_list.ShoppingListFragment"
-        android:label="@string/title_shopping_list"
-        tools:layout="@layout/fragment_shopping_list" />
-    <fragment
         android:id="@+id/navigation_recipe_details"
         android:name="com.jameschamberlain.recipes.ui.recipes.RecipeDetailsFragment"
         android:label="RecipeDetailsFragment"

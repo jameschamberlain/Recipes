@@ -21,7 +21,10 @@ import com.jameschamberlain.recipes.databinding.FragmentRecipeDetailsBinding
 
 class RecipeDetailsFragment : Fragment() {
 
-    private lateinit var binding: FragmentRecipeDetailsBinding
+    private var _binding: FragmentRecipeDetailsBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     private val args: RecipeDetailsFragmentArgs by navArgs()
 
@@ -30,7 +33,7 @@ class RecipeDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentRecipeDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentRecipeDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -61,10 +64,6 @@ class RecipeDetailsFragment : Fragment() {
             }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.recipe_details_menu, menu)
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
@@ -72,17 +71,15 @@ class RecipeDetailsFragment : Fragment() {
                 NavHostFragment.findNavController(this@RecipeDetailsFragment).navigateUp()
                 true
             }
-//            android.R.id.action_edit -> {
-//                Toast.makeText(activity, "Edit", Toast.LENGTH_SHORT).show()
-//                true
-//            }
-//            android.R.id.action_delete -> {
-//                Toast.makeText(activity, "Delete", Toast.LENGTH_SHORT).show()
-//                true
-//            }
             else ->                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
                 super.onOptionsItemSelected(item)
         }
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

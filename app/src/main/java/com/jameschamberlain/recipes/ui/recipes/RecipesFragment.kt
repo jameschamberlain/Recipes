@@ -17,7 +17,10 @@ class RecipesFragment : Fragment() {
 
     private lateinit var adapter: RecipeAdapter
 
-    private lateinit var binding: FragmentRecipesBinding
+    private var _binding: FragmentRecipesBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     private lateinit var recipesViewModel: RecipesViewModel
 
@@ -28,7 +31,7 @@ class RecipesFragment : Fragment() {
     ): View? {
         recipesViewModel =
                 ViewModelProvider(this).get(RecipesViewModel::class.java)
-        binding = FragmentRecipesBinding.inflate(inflater, container, false)
+        _binding = FragmentRecipesBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -53,5 +56,10 @@ class RecipesFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         adapter.stopListening()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

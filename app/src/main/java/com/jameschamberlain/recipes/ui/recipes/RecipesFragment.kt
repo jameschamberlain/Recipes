@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.jameschamberlain.recipes.data.Recipe
 import com.jameschamberlain.recipes.databinding.FragmentRecipesBinding
@@ -22,15 +21,15 @@ class RecipesFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private lateinit var recipesViewModel: RecipesViewModel
+    private val model: RecipesViewModel by activityViewModels()
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        recipesViewModel =
-                ViewModelProvider(this).get(RecipesViewModel::class.java)
+//        recipesViewModel =
+//                ViewModelProvider(this).get(RecipesViewModel::class.java)
         _binding = FragmentRecipesBinding.inflate(inflater, container, false)
 
         return binding.root
@@ -40,10 +39,10 @@ class RecipesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val options = FirestoreRecyclerOptions.Builder<Recipe>()
-            .setSnapshotArray(recipesViewModel.recipes)
+            .setSnapshotArray(model.recipes)
             .setLifecycleOwner(this@RecipesFragment)
             .build()
-        adapter = RecipeAdapter(options, requireContext(), this@RecipesFragment)
+        adapter = RecipeAdapter(options, requireContext(), this@RecipesFragment, model)
         binding.recipesRecyclerView.adapter = adapter
 
     }

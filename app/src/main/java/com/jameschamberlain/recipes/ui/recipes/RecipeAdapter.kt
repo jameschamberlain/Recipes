@@ -1,22 +1,15 @@
 package com.jameschamberlain.recipes.ui.recipes
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.MultiTransformation
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import com.google.firebase.storage.FirebaseStorage
 import com.jameschamberlain.recipes.GlideApp
-import com.jameschamberlain.recipes.MyAppGlideModule
 import com.jameschamberlain.recipes.data.Recipe
 import com.jameschamberlain.recipes.databinding.ItemRecipeBinding
 
@@ -25,7 +18,8 @@ private const val TAG = "RecipeAdapter"
 class RecipeAdapter(
     options: FirestoreRecyclerOptions<Recipe>,
     private val context: Context,
-    private val parentFragment: RecipesFragment
+    private val parentFragment: RecipesFragment,
+    private val viewModel: RecipesViewModel
 ) : FirestoreRecyclerAdapter<Recipe, RecipeAdapter.RecipeHolder>(options) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeHolder {
@@ -45,9 +39,9 @@ class RecipeAdapter(
         holder.descTextView.text = recipeDesc
 
         holder.parentLayout.setOnClickListener {
-            val recipeId = this.snapshots.getSnapshot(position).id
+            viewModel.selectRecipe(position)
             val action = RecipesFragmentDirections
-                .actionNavigationRecipesToNavigationRecipeDetails(recipeId)
+                .actionNavigationRecipesToNavigationRecipeDetails()
             NavHostFragment
                 .findNavController(parentFragment)
                 .navigate(action)

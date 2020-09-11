@@ -1,5 +1,6 @@
 package com.jameschamberlain.recipes.ui.recipes
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.firebase.ui.common.ChangeEventType
 import com.firebase.ui.firestore.ChangeEventListener
@@ -36,4 +37,16 @@ class RecipesViewModel : ViewModel() {
 
         override fun onError(e: FirebaseFirestoreException) = Unit
     }
+
+
+    private val selectedRecipe = MutableLiveData<Int>()
+
+    fun selectRecipe(position: Int) {
+        selectedRecipe.value = position
+    }
+
+    fun getSelectedRecipe() : MutableLiveData<Int> {
+        return selectedRecipe
+    }
+
 }

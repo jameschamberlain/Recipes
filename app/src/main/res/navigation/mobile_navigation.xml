@@ -19,9 +19,5 @@
         android:id="@+id/navigation_recipe_details"
         android:name="com.jameschamberlain.recipes.ui.recipes.RecipeDetailsFragment"
         android:label="RecipeDetailsFragment"
-        tools:layout="@layout/fragment_recipe_details">
-        <argument
-            android:name="id"
-            app:argType="string" />
-    </fragment>
+        tools:layout="@layout/fragment_recipe_details"/>
 </navigation>

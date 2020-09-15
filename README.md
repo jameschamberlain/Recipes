@@ -3,9 +3,9 @@ Recipes
 
 This is an app to add and show recipes. It is still in the early stages and currently only supports viewing recipes as a list and the details of each recipe.
 <div>
-  <img src="/screenshots/recipes_list.png" alt="Hub tab screenshot" width="20%"/>
-  <img src="/screenshots/recipe_details.png" alt="Fuxtures tab screenshot" width="20%"/>
-  <img src="/screenshots/recipe_details_scrolled.png" alt="Stats tab screenshot" width="20%"/>
+  <img src="/screenshots/recipes_list.png" alt="Recipe list screenshot" width="20%"/>
+  <img src="/screenshots/recipe_details.png" alt="Recipe details screenshot" width="20%"/>
+  <img src="/screenshots/recipe_details_scrolled.png" alt="Recipe details scrolled screenshot" width="20%"/>
 </div>
 
 Building

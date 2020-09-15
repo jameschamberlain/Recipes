@@ -1,181 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="?attr/colorSurface"
-        app:liftOnScroll="true" >
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"/>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-
-    <androidx.core.widget.NestedScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:paddingBottom="24dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="?attr/colorSurface"
+            app:elevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <TextView
+            android:id="@+id/name"
+            style="@style/TextAppearance.MaterialComponents.Headline4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/content_margin"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appbar"
+            tools:text="@string/dummy_recipe_name" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_view"
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            android:layout_marginHorizontal="@dimen/content_margin"
+            android:layout_marginTop="24dp"
+            android:background="@android:color/darker_gray"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name"
+            tools:src="@drawable/ic_recipe" />
+
+        <TextView
+            android:id="@+id/prep_title"
+            style="@style/TextAppearance.MaterialComponents.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/content_margin"
+            android:layout_marginTop="24dp"
+            android:text="@string/prep_time"
+            app:layout_constraintEnd_toStartOf="@id/cook_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_view" />
+
+        <TextView
+            android:id="@+id/prep_time"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@id/prep_title"
+            app:layout_constraintStart_toStartOf="@id/prep_title"
+            app:layout_constraintTop_toBottomOf="@id/prep_title"
+            tools:text="15 min" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintBottom_toBottomOf="@id/prep_time"
+            app:layout_constraintEnd_toStartOf="@id/cook_title"
+            app:layout_constraintStart_toEndOf="@id/prep_title"
+            app:layout_constraintTop_toTopOf="@id/prep_title" />
+
+        <TextView
+            android:id="@+id/cook_title"
+            style="@style/TextAppearance.MaterialComponents.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/cook_time"
+            app:layout_constraintBottom_toBottomOf="@id/prep_title"
+            app:layout_constraintEnd_toStartOf="@id/serves_title"
+            app:layout_constraintStart_toEndOf="@id/prep_title" />
+
+        <TextView
+            android:id="@+id/cook_time"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@id/cook_title"
+            app:layout_constraintStart_toStartOf="@id/cook_title"
+            app:layout_constraintTop_toBottomOf="@id/cook_title"
+            tools:text="1 hr" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintBottom_toBottomOf="@id/prep_time"
+            app:layout_constraintEnd_toStartOf="@id/serves_title"
+            app:layout_constraintStart_toEndOf="@id/cook_title"
+            app:layout_constraintTop_toTopOf="@id/prep_title" />
+
+        <TextView
+            android:id="@+id/serves_title"
+            style="@style/TextAppearance.MaterialComponents.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/content_margin"
+            android:text="@string/serves"
+            app:layout_constraintBottom_toBottomOf="@id/prep_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cook_title" />
+
+        <TextView
+            android:id="@+id/serves_amount"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@id/serves_title"
+            app:layout_constraintStart_toStartOf="@id/serves_title"
+            app:layout_constraintTop_toBottomOf="@id/serves_title"
+            tools:text="4" />
+
+        <TextView
+            android:id="@+id/desc_title"
+            style="@style/TextAppearance.MaterialComponents.Body2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/content_margin"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/prep_time"
+            tools:text="Description" />
+
+        <TextView
+            android:id="@+id/desc"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/content_margin"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/desc_title"
+            tools:text="@string/dummy_recipe_desc" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/content_margin">
+            android:layout_marginHorizontal="@dimen/content_margin"
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/desc"
+            app:tabIndicatorFullWidth="false">
 
-            <TextView
-                android:id="@+id/name"
-                style="@style/TextAppearance.MaterialComponents.Headline4"
+            <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/dummy_recipe_name" />
+                android:text="@string/ingredients" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/image_view"
-                android:layout_width="match_parent"
-                android:layout_height="240dp"
-                android:layout_marginTop="24dp"
-                android:background="@android:color/darker_gray"
-                android:scaleType="centerCrop"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/name"
-                tools:src="@drawable/ic_recipe" />
-
-            <TextView
-                android:id="@+id/prep_title"
-                style="@style/TextAppearance.MaterialComponents.Body2"
+            <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                app:layout_constraintEnd_toStartOf="@id/cook_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/image_view"
-                android:text="Prep time"/>
+                android:text="@string/steps" />
+        </com.google.android.material.tabs.TabLayout>
 
-            <TextView
-                android:id="@+id/prep_time"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="@id/prep_title"
-                app:layout_constraintStart_toStartOf="@id/prep_title"
-                app:layout_constraintTop_toBottomOf="@id/prep_title"
-                tools:text="15 min" />
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/tab_layout" />
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="0dp"
-                android:background="@android:color/darker_gray"
-                app:layout_constraintBottom_toBottomOf="@id/prep_time"
-                app:layout_constraintEnd_toStartOf="@id/cook_title"
-                app:layout_constraintStart_toEndOf="@id/prep_title"
-                app:layout_constraintTop_toTopOf="@id/prep_title" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/cook_title"
-                style="@style/TextAppearance.MaterialComponents.Body2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="@id/prep_title"
-                app:layout_constraintEnd_toStartOf="@id/serves_title"
-                app:layout_constraintStart_toEndOf="@id/prep_title"
-                android:text="Cook time" />
-
-            <TextView
-                android:id="@+id/cook_time"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="@id/cook_title"
-                app:layout_constraintStart_toStartOf="@id/cook_title"
-                app:layout_constraintTop_toBottomOf="@id/cook_title"
-                tools:text="1 hr" />
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="0dp"
-                android:background="@android:color/darker_gray"
-                app:layout_constraintBottom_toBottomOf="@id/prep_time"
-                app:layout_constraintEnd_toStartOf="@id/serves_title"
-                app:layout_constraintStart_toEndOf="@id/cook_title"
-                app:layout_constraintTop_toTopOf="@id/prep_title" />
-
-            <TextView
-                android:id="@+id/serves_title"
-                style="@style/TextAppearance.MaterialComponents.Body2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="@id/prep_title"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/cook_title"
-                android:text="Serves" />
-
-            <TextView
-                android:id="@+id/serves_amount"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="@id/serves_title"
-                app:layout_constraintStart_toStartOf="@id/serves_title"
-                app:layout_constraintTop_toBottomOf="@id/serves_title"
-                tools:text="4" />
-
-            <TextView
-                android:id="@+id/desc_title"
-                style="@style/TextAppearance.MaterialComponents.Body2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/prep_time"
-                tools:text="Description" />
-
-            <TextView
-                android:id="@+id/desc"
-                style="@style/TextAppearance.MaterialComponents.Body1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/desc_title"
-                tools:text="@string/dummy_recipe_desc" />
-
-            <com.google.android.material.tabs.TabLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/desc"
-                app:tabIndicatorFullWidth="false">
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ingredients" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Steps" />
-            </com.google.android.material.tabs.TabLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.core.widget.NestedScrollView>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.core.widget.NestedScrollView>

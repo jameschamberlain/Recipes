@@ -1,8 +1,10 @@
 package com.jameschamberlain.recipes.ui.recipes
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -28,11 +30,15 @@ class RecipeAdapter(
     }
 
     override fun onBindViewHolder(holder: RecipeHolder, position: Int, model: Recipe) {
-        GlideApp.with(context)
-            .load(model.image)
-            .apply(RequestOptions.bitmapTransform(RoundedCorners(8)))
-            .into(holder.imageView)
+        holder.imageView.apply {
+            transitionName = model.image
+            GlideApp.with(this)
+                .load(model.image)
+                .apply(RequestOptions.bitmapTransform(RoundedCorners(8)))
+                .into(this)
+        }
         holder.titleTextView.text = model.name
+        holder.titleTextView.transitionName = model.name
         var recipeDesc = model.description
         if (model.description.length > 120)
             recipeDesc = recipeDesc.substring(0, 117) + "..."
@@ -42,9 +48,10 @@ class RecipeAdapter(
             viewModel.selectRecipe(position)
             val action = RecipesFragmentDirections
                 .actionNavigationRecipesToNavigationRecipeDetails()
+            val extras = FragmentNavigatorExtras(holder.imageView to model.image, holder.titleTextView to model.name)
             NavHostFragment
                 .findNavController(parentFragment)
-                .navigate(action)
+                .navigate(action, extras)
         }
     }
 

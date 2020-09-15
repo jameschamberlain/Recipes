@@ -5,6 +5,8 @@
     <item android:drawable="?attr/colorSurface" />
 
     <item
-        android:drawable="@drawable/preview_window_logo"
-        android:gravity="center" />
+        android:drawable="@drawable/splash"
+        android:gravity="center"
+        android:height="525dp"
+        android:width="350dp"/>
 </layer-list>

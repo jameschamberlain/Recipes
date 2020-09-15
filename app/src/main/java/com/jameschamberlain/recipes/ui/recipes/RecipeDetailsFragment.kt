@@ -1,6 +1,7 @@
 package com.jameschamberlain.recipes.ui.recipes
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -12,7 +13,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.tabs.TabLayoutMediator
 import com.jameschamberlain.recipes.GlideApp
+import com.jameschamberlain.recipes.R
 import com.jameschamberlain.recipes.data.Recipe
 import com.jameschamberlain.recipes.databinding.FragmentRecipeDetailsBinding
 
@@ -32,18 +35,27 @@ class RecipeDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentRecipeDetailsBinding.inflate(inflater, container, false)
+
+        sharedElementEnterTransition = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         setHasOptionsMenu(true)
         (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbar)
         (activity as AppCompatActivity?)!!.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity?)!!.supportActionBar!!.title = ""
 
-        model.getSelectedRecipe().observe(viewLifecycleOwner, Observer {
+        model.getSelectedRecipe().observe(viewLifecycleOwner, {
             setupRecipe(model.recipes[it])
         })
+
+        binding.viewPager.adapter = TabAdapter(this@RecipeDetailsFragment)
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = if (position == 0) getString(R.string.ingredients) else getString(R.string.steps)
+        }.attach()
     }
 
     private fun setupRecipe(recipe: Recipe) {
@@ -52,10 +64,14 @@ class RecipeDetailsFragment : Fragment() {
         binding.prepTime.text = recipe.prepTime.toString()
         binding.desc.text = recipe.description
         binding.servesAmount.text = recipe.quantity.toString()
-        GlideApp.with(requireContext())
-            .load(recipe.image)
-            .apply(RequestOptions.bitmapTransform(RoundedCorners(8)))
-            .into(binding.imageView)
+        binding.name.transitionName = recipe.name
+        binding.imageView.apply {
+            transitionName = recipe.image
+            GlideApp.with(this)
+                .load(recipe.image)
+                .apply(RequestOptions.bitmapTransform(RoundedCorners(8)))
+                .into(this)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
